@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import Modal from './component/model';
-import CustomModel from './component/model';
+import Modal from './component/Modal';
+import CustomModel from './component/Modal';
 
 import axios from 'axios';
 
@@ -10,14 +10,14 @@ class App extends Component{
   constructor(props){
     super(props);
     this.state = {
-      model:false,
+      modal:false,
       viewCompleted: false,
       activeItem: {
         Title: "",
         Description: "",
         Completed:false,
       },
-      todoList
+      todoList: [],
     };
   }
 
@@ -33,7 +33,7 @@ class App extends Component{
   }
 
   toggle = () => {
-    this.setState ({model: !this.state.model});
+    this.setState ({modal: !this.state.modal});
   }
 
   handleSubmit = item =>{
@@ -55,12 +55,12 @@ class App extends Component{
   };
 
   createItem = () =>{
-    const item = {Title:"", model: !this.state.model};
-    this.setState ({activeItem:item, model:!this.state.model});
+    const item = {Title:"", modal: !this.state.modal};
+    this.setState ({activeItem:item, modal:!this.state.modal});
   };
 
   editItem = item =>{
-    this.setState ({activeItem:item, model:!this.state.model});
+    this.setState ({activeItem:item, modal:!this.state.modal});
 
   };
   displayCompleted = status => {
@@ -92,7 +92,7 @@ class App extends Component{
   renderItems = () =>{
     const {viewCompleted} = this.state;
     const newItems = this.state.todoList.filter(
-      item =>item.Completed == viewCompleted
+      item =>item.Completed === viewCompleted
     );
     return newItems.map(item =>(
       <li 
@@ -124,14 +124,14 @@ class App extends Component{
                 </div>
                 {this.renderTabList()}
                 <ul className="list-group list-group-flush">
-                  {this.renderItems()}
+                  {this.renderItems()} 
                 </ul>
               </div>
             </div>
             <footer className="my-3 mb-2 text-white text-center">
               Copyright 2021 &copy; All Right Reserved
             </footer>
-            {this.state.model ? (
+            {this.state.modal ? (
               <Modal activeItem = {this.state.activeItem} toggle = {this.toggle}
               onSave = {this.handleSubmit} />
             ): null }
@@ -139,8 +139,6 @@ class App extends Component{
       </main>
     )
   }
-
-  
 }
 
 export default App;

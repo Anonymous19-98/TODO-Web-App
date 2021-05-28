@@ -38,7 +38,7 @@ class CustomModel extends Component{
             <Modal isOpen={true} toggle={toggle}>
                 <ModalHeader toggle={toggle}>Task Items</ModalHeader>
                 <ModalBody>
-                    <Form>
+                    <form>
                         <formGroup>
                             <Label for="title">Title</Label>
                             <Input
@@ -66,12 +66,12 @@ class CustomModel extends Component{
                                     name="completed"
                                     value={this.state.activeItem.Completed}
                                     onChange={this.handleChange}
-                                    placeholder="Enter Task Title"
+                                    placeholder="completed"
                                 />
                                 Completed
                             </Label>
                         </formGroup>
-                    </Form>
+                    </form>
                 </ModalBody>
                 <ModalFooter>
                     <Button color="success" onClick={() => onSave(this.state.activeItem)}>
